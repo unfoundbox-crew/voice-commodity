@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Commoditization of Voice AI & The Hockey-Stick Usecase War · AgentWorth</title>
+<meta name="description" content="TTS/STT price collapse 2023-2026, Smallest.ai profile, telephony trap, vertical hockey-sticks, moat matrix, playbook. Verified Sep 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+:root {
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  --mv-ground: #ffffff; --mv-surface: #f4f4f5; --mv-surface-2: #efeff1; --mv-surface-3: #e4e4e7;
+  --mv-border: #e4e4e7; --mv-border-soft: #ececee;
+  --mv-ink: #111113; --mv-text: #3f3f46; --mv-muted: #52525b; --mv-faint: #a1a1aa;
+  --mv-accent: #7c6bb3; --mv-accent-soft: rgba(124,107,179,.08);
+  --mv-accent-border: rgba(124,107,179,.28); --mv-accent-contrast: #ffffff;
+  --mv-rise: 10px; --motion-fast: 120ms; --motion-base: 160ms;
+  --ease-out: cubic-bezier(0.22,1,0.36,1);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --mv-ground: #000000; --mv-surface: #18181b; --mv-surface-2: #1d1d20; --mv-surface-3: #27272a;
+    --mv-border: #2a2a2d; --mv-border-soft: #1c1c1f;
+    --mv-ink: #ffffff; --mv-text: #d4d4d8; --mv-muted: #a1a1aa; --mv-faint: #52525b;
+    --mv-accent: #a396d6; --mv-accent-soft: rgba(163,150,214,.1);
+    --mv-accent-border: rgba(163,150,214,.3); --mv-accent-contrast: #0d0d0f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --mv-ground: #000000; --mv-surface: #18181b; --mv-surface-2: #1d1d20; --mv-surface-3: #27272a;
+  --mv-border: #2a2a2d; --mv-border-soft: #1c1c1f;
+  --mv-ink: #ffffff; --mv-text: #d4d4d8; --mv-muted: #a1a1aa; --mv-faint: #52525b;
+  --mv-accent: #a396d6; --mv-accent-soft: rgba(163,150,214,.1);
+  --mv-accent-border: rgba(163,150,214,.3); --mv-accent-contrast: #0d0d0f;
+}
+@media (prefers-reduced-motion: reduce) { :root { --mv-rise: 0px; } * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--mv-ground); color: var(--mv-ink); font-family: var(--font-sans); }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 36px 24px 90px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.kicker { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--mv-muted); }
+h1 { font-size: clamp(36px,5.4vw,62px); letter-spacing: -.032em; line-height: 1.0; margin: 12px 0 10px; }
+.sub { color: var(--mv-text); font-size: 17px; line-height: 1.6; max-width: 760px; }
+.toggle { display: flex; border: 1px solid var(--mv-border); border-radius: 999px; overflow: hidden; font-size: 13px; flex-shrink: 0; }
+.toggle button { border: 0; background: transparent; color: var(--mv-muted); padding: 8px 14px; cursor: pointer; font: inherit; }
+.toggle button.on { background: var(--mv-ink); color: var(--mv-ground); }
+.kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 26px 0 8px; }
+@media (max-width: 860px) { .kpis { grid-template-columns: repeat(2,1fr); } }
+.kpi { border: 1px solid var(--mv-border); background: var(--mv-surface); border-radius: 16px; padding: 16px; }
+.kpi b { display: block; font-size: 30px; letter-spacing: -.02em; }
+.kpi span { color: var(--mv-muted); font-size: 12.5px; line-height: 1.45; display: block; margin-top: 4px; }
+.sec { margin-top: 34px; }
+.sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.sec-num { font-family: var(--font-mono); color: var(--mv-accent); font-size: 13px; }
+.sec h2 { font-size: 22px; letter-spacing: -.02em; margin: 0; }
+.sec p.d { color: var(--mv-text); font-size: 14.5px; line-height: 1.6; max-width: 780px; }
+.grid2 { display: grid; grid-template-columns: 1.35fr .85fr; gap: 16px; margin-top: 14px; }
+@media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+.grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 14px; }
+@media (max-width: 900px) { .grid3 { grid-template-columns: 1fr; } }
+.card { border: 1px solid var(--mv-border); border-radius: 18px; padding: 20px; background: var(--mv-ground); }
+.card h3 { margin: 0 0 4px; font-size: 15px; }
+.card p.h { margin: 0 0 12px; color: var(--mv-muted); font-size: 13px; }
+.chart { width: 100%; }
+table.t { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.t th { text-align: left; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--mv-muted); padding: 8px 8px; border-bottom: 1px solid var(--mv-border); }
+table.t td { padding: 9px 8px; border-bottom: 1px solid var(--mv-border-soft); color: var(--mv-text); vertical-align: top; }
+table.t td:first-child { color: var(--mv-ink); font-weight: 600; }
+.flag { font-family: var(--font-mono); font-size: 10.5px; border-radius: 999px; padding: 2px 8px; border: 1px solid var(--mv-border); white-space: nowrap; }
+.flag.v { border-color: var(--mv-accent-border); background: var(--mv-accent-soft); color: var(--mv-ink); }
+.flag.r { color: var(--mv-muted); }
+.flag.z { border-color: var(--mv-accent-border); background: var(--mv-ink); color: var(--mv-ground); }
+.take { border-left: 3px solid var(--mv-accent); padding: 10px 14px; background: var(--mv-surface); border-radius: 0 12px 12px 0; margin: 10px 0; font-size: 14px; line-height: 1.55; color: var(--mv-text); }
+.take b { color: var(--mv-ink); }
+.foot { margin-top: 30px; color: var(--mv-faint); font-size: 12px; font-family: var(--font-mono); line-height: 1.8; }
+.pill { display: inline-block; font-family: var(--font-mono); font-size: 11px; border: 1px solid var(--mv-accent-border); background: var(--mv-accent-soft); border-radius: 999px; padding: 4px 10px; margin: 0 8px 8px 0; }
+.reveal { opacity: 0; transform: translateY(var(--mv-rise)); }
+.mono { font-family: var(--font-mono); }
+.check { list-style: none; margin: 8px 0 0; padding: 0; font-size: 13.5px; color: var(--mv-text); line-height: 1.6; }
+.check li { padding: 7px 0 7px 26px; position: relative; border-bottom: 1px solid var(--mv-border-soft); }
+.check li:last-child { border-bottom: 0; }
+.check li::before { content: "→"; position: absolute; left: 4px; color: var(--mv-accent); font-family: var(--font-mono); }
+.small { font-size: 12.5px; color: var(--mv-muted); line-height: 1.6; }
+.toc { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; flex-wrap: wrap; background: var(--mv-ground); padding: 10px 0; margin-top: 18px; border-bottom: 1px solid var(--mv-border-soft); }
+.toc a { font-family: var(--font-mono); font-size: 11.5px; color: var(--mv-muted); text-decoration: none; border: 1px solid var(--mv-border); border-radius: 999px; padding: 4px 10px; background: var(--mv-ground); }
+.toc a:hover { color: var(--mv-ink); border-color: var(--mv-accent-border); }
+.tscroll { overflow-x: auto; margin: 0 -4px; padding: 0 4px; }
+.tscroll table.t { min-width: 760px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="kicker">AgentWorth · Voice Commodity Board · Verified 12 Sep 2026 · 9 lanes</div>
+    <div class="toggle"><button data-t="system" class="on">System</button><button data-t="light">Light</button><button data-t="dark">Dark</button></div>
+  </div>
+  <h1 class="reveal">The commoditization of voice AI &amp; the hockey-stick usecase war</h1>
+  <p class="sub reveal">Like LLMs, raw acoustic generation is collapsing to zero. ElevenLabs → Cartesia → Smallest.ai → Kokoro/local Whisper is a 12x price fall in three years. The margin left the model and moved to the minute, the seat, and the state. Below: the collapse, the leanest lab, the telephony trap, where usage actually 100x's, and the playbook.</p>
+  <div class="reveal"><span class="pill">$11.00 → $0.88 → $0 /hr TTS</span><span class="pill">TTFB sub-100ms is table stakes</span><span class="pill">Toll is $0.11–0.20/min</span><span class="pill">Seat &gt; minute &gt; model</span></div>
+  <nav class="toc reveal" aria-label="Sections"><a href="#s01">01 Collapse</a><a href="#s02">02 Smallest</a><a href="#s03">03 Trap</a><a href="#s04">04 Hockey-stick</a><a href="#s05">05 Moat</a><a href="#s06">06 Playbook</a><a href="#s07">07 Receipts</a><a href="#s08">08 Risks</a></nav>
+
+  <div class="kpis">
+    <div class="kpi reveal"><b>12.5x</b><span>TTS $/hr fall 2023→2026: ElevenLabs flagship $11.00 → Smallest Lightning $0.88. Kokoro/local = $0.</span></div>
+    <div class="kpi reveal"><b>$0.88/hr</b><span>Smallest Lightning v3.1 at $0.175/10k chars (~50k chars/hr). Pro $0.195/10k. Pulse STT $0.18/hr batch.</span></div>
+    <div class="kpi reveal"><b>$0.11–0.20</b><span>All-in $/min for a B2B voice call: carrier + STT/TTS + LLM. $66–120 per 10k minutes before support.</span></div>
+    <div class="kpi reveal"><b>8,073★</b><span>OpenWhispr OSS desktop dictation (994 forks, MIT, Electron) — the only shipped hotkey client running Smallest Pulse (PR #1031, merged 2026-07-01). No Raycast/Alfred client on Smallest found.</span></div>
+  </div>
+
+  <div class="sec" id="s01">
+    <div class="sec-head"><span class="sec-num">01</span><h2>The price collapse</h2></div>
+    <p class="d">One hour of English ≈ 50k characters. That single conversion kills every per-character price page: flagship TTS fell from ~$11/hr to under $1/hr, and open weights took the floor to zero. STT followed: Whisper API $0.36/hr → Pulse $0.18/hr → on-device $0.</p>
+    <div class="grid2">
+      <div class="card reveal"><h3>TTS $/hr of audio, 2023 → 2026</h3><p class="h">50k chars = 1hr. Log scale — Kokoro/local is $0 (unplottable on log); dotted line is a $0-floor proxy. Inferred arithmetic off verified list prices.</p><div id="c-collapse" class="chart" style="height:400px"></div>
+        <p class="small">Anchors: ElevenLabs $22/100k (2023) → Flash $50/1M after -55% cut May-2026 · Cartesia ~$31/1M · Smallest $0.175/10k · Kokoro-82M Apache-2.0 $0 + electricity. zsh local: <span class="mono">brew install whisper-cpp ffmpeg && pip install "kokoro>=0.9.2" soundfile</span></p></div>
+      <div class="card reveal"><h3>STT $/hr, 2026</h3><p class="h">60 min of transcription. Local = electricity.</p><div id="c-stt" class="chart" style="height:260px"></div>
+        <div class="take"><b>Acoustics went the way of tokens.</b> ElevenLabs cut API -55% (May 2026, Flash $50/1M). Cartesia undercut to ~$1.49/hr. Smallest undercut again to $0.88/hr. Kokoro-82M (Apache-2.0, 82M params) + WhisperKit/whisper.cpp run on CPU/Neural Engine at $0 marginal.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="s02">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Smallest AI profile &amp; capital</h2></div>
+    <p class="d">Founded 2023 by Sudarshan Kamath (<span class="mono">@kamath_sutra</span>, CEO) &amp; Akshat Mandloi (CTO) — IIT Guwahati, ex-Bosch autonomous vehicles. SF (311 California St) + Bengaluru. <b>$13M Series A (Aug 2026)</b> led by Seligman Ventures (Sierra Ventures, 3one4 Capital, Better Capital); total funding now <b>&gt;$21M</b> with ~60 headcount. Stack: Lightning v3.1, Pulse STT, Hydra S2S, Electron SLM, Atoms agents.</p>
+    <div class="grid2">
+      <div class="card reveal"><h3>Capital &amp; institutional clock</h3><p class="h">$21M raised shifts them from stealth craft to institutional growth.</p>
+        <div class="take"><b>Venture clock is ticking.</b> A $13M Series A led by Seligman means Smallest must deliver steep ARR growth. If they chase legacy contact centers, they run straight into carrier tolls and high-churn IVRs.</div>
+        <div class="take"><b>Full-stack, one key.</b> Pulse STT ($0.003/min batch) + Lightning TTS + Hydra full-duplex S2S + Atoms on a single key. Full speech-to-speech architecture aims to bypass cascaded latency.</div>
+        <div class="take"><b>Grants as GTM.</b> $500k pool / $10k per startup × 6 months + AI Grants India (1,500+ builders). With fresh dry powder, developer-first tooling is their authentic escape velocity.</div>
+      </div>
+      <div class="card reveal"><h3>Funding: $8M → $13M</h3><p class="h">Seed Oct-2025 (Sierra, 3one4) · Series A Jul-2026 (Seligman). &gt;$21M total.</p><div id="c-funding" class="chart" style="height:260px"></div></div>
+      <div class="card reveal"><h3>At a glance</h3><p class="h">Verified: primary blog post, presskit, pricing, docs, grants page.</p>
+        <table class="t"><tr><th>Fact</th><th>Value</th></tr>
+        <tr><td>Founded</td><td>2023 · SF + Bengaluru · ~60 team</td></tr>
+        <tr><td>Founders</td><td>Kamath (CEO) · Mandloi (CTO) · IITG / Bosch AV</td></tr>
+        <tr><td>Capital</td><td><b>$13M Series A</b> (Aug 2026) · <b>&gt;$21M total</b> <span class="flag v">verified</span></td></tr>
+        <tr><td>Lead Investors</td><td>Seligman Ventures · Sierra · 3one4 Capital</td></tr>
+        <tr><td>Flagships</td><td>Lightning v3.1 · Pulse · Hydra S2S · Atoms</td></tr>
+        <tr><td>Compliance</td><td>SOC 2 · GDPR · HIPAA, on-prem Enterprise</td></tr>
+        <tr><td>Handles</td><td><span class="mono">@smallest_AI</span> (9.5k) · <span class="mono">@kamath_sutra</span> (22k) · <span class="mono">@AkshatMandloi10</span></td></tr></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="s03">
+    <div class="sec-head"><span class="sec-num">03</span><h2>The telephony trap</h2></div>
+    <p class="d">B2B IVR, support deflection, and cold-call bots look like revenue. They are linear: every minute pays a carrier toll, every point of containment decays, and cold-call connect rates never compound. Developers meanwhile get zero OS integration — so the highest-frequency surface (the desktop) stays voice-less.</p>
+    <div class="grid2">
+      <div class="card reveal"><h3>Where the $/min actually goes</h3><p class="h">Typical US call, 2026 list prices. The model is the smallest slice.</p><div id="c-toll" class="chart" style="height:320px"></div></div>
+      <div class="card reveal"><h3>Why it doesn't compound</h3><p class="h">Containment and connect ceilings: Twilio $0.014 out / $0.0085 in · ElevenLabs agents $0.08 (+$0.16 burst) · Cartesia $0.06+$0.014 · Smallest all-in $0.09–0.21.</p>
+        <table class="t"><tr><th>Funnel</th><th>Ceiling</th><th>Flag</th></tr>
+        <tr><td>IVR containment (avg)</td><td>~40%; menu IVR 5–10%</td><td><span class="flag v">verified</span></td></tr>
+        <tr><td>Mixed-intent IVR leaders</td><td>45–60%; chatbots 10–30%</td><td><span class="flag v">verified</span></td></tr>
+        <tr><td>Cold-call connect</td><td>5.4% avg · 13.3% top quartile</td><td><span class="flag v">verified</span></td></tr>
+        <tr><td>Desktop seat contrast</td><td>$15/mo flat vs $0.15/min toll</td><td><span class="flag v">verified</span></td></tr></table>
+        <div class="take"><b>Per-seat SaaS scales with habit; per-minute scales with cost.</b> Wispr Flow Pro $15/mo and Apple Dictation $0 sit on the machine all day. A $0.15/min bot gets hung up on — then billed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="s04">
+    <div class="sec-head"><span class="sec-num">04</span><h2>The vertical hockey-stick</h2></div>
+    <p class="d">Voice 100x's where it is ambient, resident, and executable — not where it answers a queue. Three surfaces, one property: marginal minute cost near zero, session length measured in hours.</p>
+    <div class="grid3">
+      <div class="card reveal"><h3>a) Ambient co-living</h3><p class="h">AirPods on while cooking chai.</p><p class="small">Persistent 8-hr background companion, conversational banter, 150M+ AirPods in the wild. No dial-in, no hang-up — presence, not calls. Pulse-class STT at $0.18/hr makes always-on listen affordable; local VAD makes it polite.</p><div class="take"><b>Metric:</b> hours/day, not calls/day.</div></div>
+      <div class="card reveal"><h3>b) Native OS &amp; IDE pairing</h3><p class="h">macOS floating glass HUD, sub-50ms hotkeys.</p><p class="small">Wispr Flow-style direct code injection: hold Fn, speak the diff, release to paste at cursor. No browser tab, no copy-paste. Nielsen ≤100ms feels instant; HUD budget &lt;50ms. OpenWhispr already proves the slot — Smallest Pulse just never owned it.</p><div class="take"><b>Metric:</b> keystrokes replaced, not minutes billed.</div></div>
+      <div class="card reveal"><h3>c) Executable semantic media</h3><p class="h">MotionVector DocIR voice patching.</p><p class="small">Speak to edit <i>state</i>, not pixels: “tighten the third beat, warm the key light” → plan → apply → re-render only changed frames. State diffs are bytes; pixel renders are megawatts. Voice becomes the commit message that executes itself.</p><div class="take"><b>Metric:</b> patches accepted, not audio streamed.</div></div>
+    </div>
+    <div class="card reveal" style="margin-top:16px"><h3>Linear toll vs hockey-stick usage</h3><p class="h"><span class="flag z">PROJECTION</span> Illustrative sessions/day index, not measured data. IVR scales with headcount; ambient/OS/semantic scale with habit.</p><div id="c-hockey" class="chart" style="height:340px"></div></div>
+  </div>
+
+  <div class="sec" id="s05">
+    <div class="sec-head"><span class="sec-num">05</span><h2>The voice moat matrix</h2></div>
+    <p class="d">TTFB is table stakes (everyone claims sub-300ms). The real axes: $/hr, streaming protocol, and whether you can leave. Open weights have no moat and no lock — that is the point.</p>
+    <div class="card reveal"><div class="tscroll"><table class="t">
+      <tr><th>Engine</th><th>TTFB</th><th>Cost/hr audio</th><th>Streaming</th><th>Lock</th><th>Flag</th></tr>
+      <tr><td>Smallest Lightning v3.1</td><td>sub-100ms</td><td>$0.88 ($0.175/10k)</td><td>REST + WS chunked</td><td>API + on-prem Ent.</td><td><span class="flag v">verified</span></td></tr>
+      <tr><td>Cartesia Sonic-3.6</td><td>sub-90ms</td><td>~$1.49</td><td>WS + SSE chunked</td><td>API-only (VPC Ent.)</td><td><span class="flag v">verified</span></td></tr>
+      <tr><td>ElevenLabs Turbo/Flash</td><td>~75ms Flash</td><td>$2.50 / $5.00</td><td>WS stream-input + SSE</td><td>API-only</td><td><span class="flag v">verified</span></td></tr>
+      <tr><td>OpenAI Realtime</td><td>no published TTFB (WebRTC+WS)</td><td>token-metered (~$40 in/$80 out per 1M audio tok)</td><td>WebRTC + WS</td><td>API-only, preset voices</td><td><span class="flag r">reported</span></td></tr>
+      <tr><td>Kyutai Moshi</td><td>~160ms theory, ~200ms on L4</td><td>$0 + GPU (CC-BY 4.0)</td><td>WS full-duplex S2S</td><td>Open weights, self-host</td><td><span class="flag v">verified</span></td></tr>
+      <tr><td>Kokoro-82M</td><td>CPU RT / GPU ~50ms</td><td>$0 (Apache-2.0)</td><td>File/chunk + wrappers</td><td>None — 54 fixed voices</td><td><span class="flag z">$0 floor</span></td></tr>
+    </table></div>
+    <div class="take"><b>Read it like a buyer:</b> if you need clones + Indic code-mix + compliance, Smallest is cheapest compliant seat. If you need zero marginal cost and can live with fixed voices, Kokoro already won. Nobody wins on TTFB alone anymore.</div>
+    </div>
+  </div>
+
+  <div class="sec" id="s06">
+    <div class="sec-head"><span class="sec-num">06</span><h2>The playbook for Smallest.ai</h2></div>
+    <p class="d">Make the usage chart hockey-stick by sponsoring the ecosystems developers already live in — not by buying more IVR logos. Give away the minute, own the seat and the state.</p>
+    <div class="card reveal"><h3>The flywheel</h3><p class="h">Sponsored minutes buy habit; habit buys seats; seats fund minutes.</p>
+      <svg viewBox="0 0 340 250" style="width:100%;height:auto" font-family="Geist Mono, monospace" font-size="11">
+        <rect x="100" y="8" width="140" height="44" rx="22" fill="var(--mv-accent-soft)" stroke="var(--mv-accent-border)"/><text x="170" y="26" text-anchor="middle" fill="var(--mv-ink)">Sponsored $0/min</text><text x="170" y="40" text-anchor="middle" fill="var(--mv-muted)">grants + proxy pools</text>
+        <rect x="8" y="170" width="150" height="44" rx="22" fill="var(--mv-surface)" stroke="var(--mv-border)"/><text x="83" y="188" text-anchor="middle" fill="var(--mv-ink)">OSS desktop</text><text x="83" y="202" text-anchor="middle" fill="var(--mv-muted)">daily habit, seat</text>
+        <rect x="182" y="170" width="150" height="44" rx="22" fill="var(--mv-surface)" stroke="var(--mv-border)"/><text x="257" y="188" text-anchor="middle" fill="var(--mv-ink)">Paid seat</text><text x="257" y="202" text-anchor="middle" fill="var(--mv-muted)">concurrency + on-prem</text>
+        <path id="f3" d="M135,52 C95,105 70,125 76,168" stroke="var(--mv-accent)" stroke-width="2" stroke-dasharray="6 6"/>
+        <path id="f4" d="M205,52 C245,105 252,125 256,168" stroke="var(--mv-accent)" stroke-width="2" stroke-dasharray="6 6"/>
+        <path d="M158,192 C170,140 170,100 165,54" stroke="var(--mv-faint)" stroke-width="2" stroke-dasharray="4 6"/>
+        <path d="M182,192 C172,140 172,100 168,54" stroke="var(--mv-faint)" stroke-width="2" stroke-dasharray="4 6"/>
+        <text x="170" y="120" text-anchor="middle" fill="var(--mv-muted)">minutes ↓ · habit ↑ · revenue ↺</text>
+      </svg>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card reveal"><h3>Sponsor the desktop, don't pitch it</h3><p class="h">Fund what OpenWhispr proved, on every OS.</p>
+        <ul class="check">
+          <li><b>Own the OpenWhispr slot:</b> first-party Pulse provider, signed builds, $0 grant pool for dictation minutes — the Wispr Flow killer is OSS + sponsored inference.</li>
+          <li><b>Ship a reference macOS HUD:</b> floating glass, Fn hotkey, &lt;50ms overlay, direct paste/inject. MIT it. Let Raycast/Alfred clone it.</li>
+          <li><b>Pet-Talk wedge:</b> fund <span class="mono">pet-talk</span> ambient companion in this org — 8-hr AirPods sessions are the retention chart IVR will never print.</li>
+        </ul>
+      </div>
+      <div class="card reveal"><h3>Become the proxy's favorite voice</h3><p class="h">LiteLLM has no Smallest provider today — that is the opening.</p>
+        <ul class="check">
+          <li><b>LiteLLM virtual proxy pool:</b> no native <span class="mono">smallest_ai/</span> provider today (confirmed: providers list + code search = English-word hits only). Path: OpenAI-compatible shim (<span class="mono">api_base: https://api.smallest.ai/waves/v1</span>) now, upstream provider PR next, virtual keys per grantee with <span class="mono">max_budget</span> + spend tracking.</li>
+          <li><b>TrueFoundry → LiteLLM bridge:</b> you already own TrueFoundry gateway; mirror it into LiteLLM docs with spend tracking per key.</li>
+          <li><b>DocIR voice patches:</b> MotionVector `speak-to-edit` verbs over Hydra S2S — voice commits state, renderer re-renders only changed frames. Demo it, then SDK it.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card reveal" style="margin-top:16px"><h3>The one-slide bet</h3><p class="h">What to watch weekly.</p>
+      <div class="take"><b>Give away the minute, price the habit:</b> free/sponsored Pulse minutes inside OSS desktop + proxy pools; paid seats (HUD Pro), paid concurrency, paid on-prem/HIPAA. Telephony becomes the side quest that funds the mission.</div>
+      <div class="take"><b>Kill signals:</b> TTS $/hr still falling &gt;30%/yr; GB200-grade local STT under $100 BOM; a Raycast-native voice extension crossing 100k installs. If Smallest isn't inside all three, someone else's logo is.</div>
+    </div>
+  </div>
+
+  <div class="sec" id="s07">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Receipts</h2></div>
+    <p class="d">Every load-bearing number, one click away. Fetched 12 Sep 2026.</p>
+    <div class="card reveal"><table class="t">
+      <tr><th>Claim</th><th>Receipt</th></tr>
+      <tr><td>Lightning $0.175/10k · Pulse $0.003–0.004/min · agents $0.09–0.21/min</td><td class="mono">smallest.ai/pricing/models · smallest.ai/pricing/agents · smallest.ai/blog/smallest-ai-vs-cartesia</td></tr>
+      <tr><td>Seed $8M Oct-2025 (Sierra, 3one4) · Series A $13M Jul-2026 (Seligman) · &gt;$21M total</td><td class="mono">siliconangle.com/2025/10/09 · techcrunch.com/2026/07/31 · smallest.ai/blog/series-a-funding-13m</td></tr>
+      <tr><td>ElevenLabs -55% TTS May-2026 · Flash $50/1M · agents $0.08/min</td><td class="mono">elevenlabs.io/blog/weve-lowered-api-agents-pricing · elevenlabs.io/pricing/api · elevenlabs.io/pricing/agents</td></tr>
+      <tr><td>Cartesia agents $0.06+$0.014 telco · Kokoro-82M Apache-2.0 · WhisperKit / whisper.cpp $0</td><td class="mono">cartesia.ai/pricing · docs.cartesia.ai/pricing · huggingface.co/hexgrad/Kokoro-82M · github.com/argmaxinc/WhisperKit · github.com/ggml-org/whisper.cpp</td></tr>
+      <tr><td>OpenWhispr 8,073★/994 forks · Pulse PR #1031 merged 2026-07-01 · cookbook #53 (4c2a5ef)</td><td class="mono">github.com/OpenWhispr/openwhispr/pull/1031 · github.com/smallest-inc/cookbook/commit/4c2a5ef · github.com/smallest-inc (17 repos)</td></tr>
+      <tr><td>Twilio $0.014 out/$0.0085 in · IVR ~40% (NICE) · cold-call 5.4%/13.3% (Gong 300M)</td><td class="mono">twilio.com/en-us/voice/pricing/us · nice.com/glossary/containment-rate · gong.io/blog · nngroup.com/articles/response-times</td></tr>
+      <tr><td>No LiteLLM native provider · TrueFoundry gateway · n8n + Vercel providers</td><td class="mono">docs.litellm.ai/docs/providers · truefoundry.com/docs/ai-gateway/smallest-ai · npmjs.com/package/n8n-nodes-smallestai · github.com/smallest-inc/smallest-ai-vercel-provider</td></tr>
+      <tr><td>Handles: @smallest_AI (9.5k) · @kamath_sutra (22k) · @AkshatMandloi10 · grants $500k/$10k</td><td class="mono">x.com/smallest_AI · x.com/kamath_sutra · x.com/AkshatMandloi10 · smallest.ai/grants · smallestai.thescrs.org</td></tr>
+    </table></div>
+  </div>
+
+  <div class="sec" id="s08">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Risks: what kills this thesis</h2></div>
+    <p class="d">Three ways the bet breaks, plus the weekly tripwires that would change my mind. A thesis without kill signals is a story.</p>
+    <div class="grid2">
+      <div class="card reveal"><h3>How it breaks</h3><p class="h">Ranked by damage, not probability.</p>
+        <div class="take"><b>Apple sherlocks the desktop.</b> On-device dictation + app-intent voice actions ship OS-native and free. The OSS HUD lane loses its oxygen — Mitigation: proxy pools + semantic-media lane survive; dictation was never the whole bet.</div>
+        <div class="take"><b>The Series A clock forces IVR chasing.</b> $13M at institutional multiples needs ARR now; contact-center logos are the fastest revenue and the slowest compounder. Watch the customer page: logos without developer minutes is the tell.</div>
+        <div class="take"><b>Kokoro-class quality crosses "good enough" for Indic prosody.</b> If a $0 Apache voice matches Lightning on Hindi/Tamil code-mix benchmarks, the compliant-seat premium compresses to concurrency + HIPAA only.</div>
+      </div>
+      <div class="card reveal"><h3>Change-my-mind watchlist</h3><p class="h">Check weekly; any trip = re-open the thesis.</p>
+        <table class="t"><tr><th>Tripwire</th><th>Threshold</th></tr>
+        <tr><td>TTS $/hr decline</td><td>Still falling &gt;30%/yr = thesis holds; flat = moat talk returns</td></tr>
+        <tr><td>Local STT BOM</td><td>Sub-$100 box running realtime STT = ambient lane accelerates</td></tr>
+        <tr><td>Raycast-native voice ext.</td><td>100k installs without Smallest inside = seat lost</td></tr>
+        <tr><td>LiteLLM provider PR</td><td>Merged upstream = proxy lane won; closed = reroute via TrueFoundry</td></tr>
+        <tr><td>Smallest repricing</td><td>Raise above $0.25/10k without latency gain = premium broken</td></tr></table>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot reveal">METHOD — 9 research lanes, WebSearch deep + primary fetch (smallest.ai/pricing, docs.smallest.ai, cartesia.ai/pricing, elevenlabs.io/pricing, Twilio/NICE/Gong benchmarks, github.com/smallest-inc + OpenWhispr, smallest.ai/blog). Tiers: verified = read pricing/docs/filing/primary announcement; reported = multi-outlet anonymous; inferred = $/hr arithmetic (50k chars = 1hr audio) flagged inline. Capital verified: $13M Series A led by Seligman Ventures (Aug 2026), &gt;$21M total funding. Gaps: per-deal IVR containment beyond public benchmarks, OpenWhispr star count drift. Next refresh: event-driven on repricing, LiteLLM provider merge, or reference HUD ship. Contact: agentworth.dev/voice (planned).</p>
+</div>
+<script>
+const root = document.documentElement;
+document.querySelectorAll('.toggle button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.toggle button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  const t = b.dataset.t;
+  if (t === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', t);
+  setTimeout(drawAll, 60);
+}));
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+gsap.to('.reveal', { opacity: 1, y: 0, duration: reduced ? 0 : 0.5, stagger: reduced ? 0 : 0.06, ease: 'power3.out' });
+if (!reduced) gsap.to('#f3,#f4', { strokeDashoffset: -48, duration: 1.2, repeat: -1, ease: 'none' });
+let charts = [];
+function pal() { const s = getComputedStyle(document.documentElement); return { ink: s.getPropertyValue('--mv-ink').trim(), mut: s.getPropertyValue('--mv-muted').trim(), acc: s.getPropertyValue('--mv-accent').trim(), border: s.getPropertyValue('--mv-border').trim() }; }
+function mk(id, opt) { const el = document.getElementById(id); const c = echarts.init(el); c.setOption(opt); charts.push(c); }
+function drawAll() {
+  const p = pal(); charts.forEach(c => c.dispose()); charts = [];
+  const ax = { splitLine: { lineStyle: { color: p.border } }, axisLabel: { color: p.mut, fontFamily: 'Geist Mono', fontSize: 11 } };
+  mk('c-collapse', { backgroundColor: 'transparent', tooltip: { trigger: 'axis', valueFormatter: v => '$' + v + '/hr' },
+    legend: { textStyle: { color: p.mut, fontFamily: 'Geist Mono', fontSize: 11 }, bottom: 0 },
+    grid: { left: 8, right: 16, top: 12, bottom: 56, containLabel: true },
+    xAxis: { type: 'category', data: ['2023','2024','2025','2026'], axisLabel: { color: p.mut, fontFamily: 'Geist Mono' } },
+    yAxis: Object.assign({ type: 'log', logBase: 10, min: 0.05, max: 20 }, ax),
+    series: [
+      { name: 'ElevenLabs flagship', type: 'line', smooth: true, data: [11.00,10.00,9.09,5.00], lineStyle: { width: 2.5, color: p.acc }, itemStyle: { color: p.acc }, symbolSize: 7 },
+      { name: 'Cartesia Sonic', type: 'line', smooth: true, data: [null,3.00,1.60,1.49], lineStyle: { width: 2, type: 'dashed', color: p.mut }, itemStyle: { color: p.mut }, symbolSize: 6 },
+      { name: 'Smallest Lightning', type: 'line', smooth: true, data: [null,null,0.88,0.88], lineStyle: { width: 2.5, color: p.ink }, itemStyle: { color: p.ink }, symbolSize: 7 },
+      { name: 'Kokoro / local ($0)', type: 'line', data: [null,0,0,0], lineStyle: { width: 2, type: 'dotted', color: p.mut }, itemStyle: { color: p.mut }, symbolSize: 0, markLine: { silent: true, symbol: 'none', lineStyle: { width: 1.5, type: 'dotted', color: p.mut }, label: { color: p.mut, fontFamily: 'Geist Mono', fontSize: 10, formatter: '$0 floor (log axis can\'t show 0)' }, data: [{ yAxis: 0.06 }] } }
+    ], animationDuration: reduced ? 0 : 800 });
+  mk('c-funding', { backgroundColor: 'transparent', tooltip: { trigger: 'item', formatter: '{b}: ${c}M' },
+    grid: { left: 8, right: 56, top: 8, bottom: 0, containLabel: true },
+    xAxis: Object.assign({ type: 'value', max: 15 }, ax),
+    yAxis: { type: 'category', data: ['Seed Oct-2025', 'Series A Jul-2026'], axisLabel: { color: p.ink, fontSize: 12, fontFamily: 'Geist Mono' }, axisLine: { show: false }, axisTick: { show: false } },
+    series: [{ type: 'bar', data: [8,13], barWidth: 22, itemStyle: { borderRadius: [0,7,7,0], color: p.acc },
+      label: { show: true, position: 'right', color: p.mut, fontFamily: 'Geist Mono', formatter: '${c}M' } }],
+    animationDuration: reduced ? 0 : 800 });
+  mk('c-stt', { backgroundColor: 'transparent', grid: { left: 8, right: 60, top: 8, bottom: 0, containLabel: true },
+    xAxis: Object.assign({ type: 'value' }, ax),
+    yAxis: { type: 'category', data: ['Deepgram stream','Whisper API','Deepgram batch','Pulse realtime','Pulse batch','Local Whisper'],
+      axisLabel: { color: p.ink, fontSize: 12 }, axisLine: { show: false }, axisTick: { show: false } },
+    series: [{ type: 'bar', data: [0.46,0.36,0.26,0.24,0.18,0], barWidth: 14,
+      itemStyle: { borderRadius: [0,7,7,0], color: p.acc },
+      label: { show: true, position: 'right', color: p.mut, fontFamily: 'Geist Mono', formatter: '${c}/hr' } }],
+    tooltip: { trigger: 'item', formatter: '{b}: ${c}/hr' }, animationDuration: reduced ? 0 : 800 });
+  mk('c-toll', { backgroundColor: 'transparent', tooltip: { trigger: 'axis', valueFormatter: v => '$' + v },
+    legend: { textStyle: { color: p.mut, fontFamily: 'Geist Mono', fontSize: 11 }, bottom: 0 },
+    grid: { left: 8, right: 8, top: 8, bottom: 56, containLabel: true },
+    xAxis: { type: 'category', data: ['Support IVR','Cold-call bot','Premium agent'], axisLabel: { color: p.mut, fontFamily: 'Geist Mono' } },
+    yAxis: Object.assign({ type: 'value', max: 0.22 }, ax),
+    series: [
+      { name: 'Carrier', type: 'bar', stack: 't', data: [0.014,0.014,0.022], itemStyle: { color: p.border } },
+      { name: 'STT+TTS', type: 'bar', stack: 't', data: [0.05,0.05,0.08], itemStyle: { color: p.mut } },
+      { name: 'LLM+host', type: 'bar', stack: 't', data: [0.05,0.05,0.10], itemStyle: { color: p.acc } }],
+    animationDuration: reduced ? 0 : 800 });
+  mk('c-hockey', { backgroundColor: 'transparent', tooltip: { trigger: 'axis' },
+    legend: { textStyle: { color: p.mut, fontFamily: 'Geist Mono', fontSize: 11 }, bottom: 0 },
+    grid: { left: 8, right: 16, top: 12, bottom: 56, containLabel: true },
+    graphic: { type: 'text', left: 'center', top: '36%',
+      style: { text: 'PROJECTION', fill: p.mut, font: '700 34px Geist Mono, monospace', opacity: 0.16 } },
+    xAxis: { type: 'category', boundaryGap: false, data: ['M0','M3','M6','M9','M12','M18','M24'], axisLabel: { color: p.mut, fontFamily: 'Geist Mono' } },
+    yAxis: Object.assign({ type: 'value', name: 'sessions/day (idx)' }, ax),
+    series: [
+      { name: 'B2B IVR (linear)', type: 'line', data: [10,14,18,22,26,32,38], lineStyle: { width: 2, type: 'dashed', color: p.mut }, itemStyle: { color: p.mut }, symbolSize: 0 },
+      { name: 'Ambient companion', type: 'line', smooth: true, data: [4,8,18,42,90,220,480], lineStyle: { width: 2.5, color: p.acc }, itemStyle: { color: p.acc }, symbolSize: 5 },
+      { name: 'OS HUD inject', type: 'line', smooth: true, data: [6,12,26,58,120,260,520], lineStyle: { width: 2.5, color: p.ink }, itemStyle: { color: p.ink }, symbolSize: 5 },
+      { name: 'Semantic media patch', type: 'line', smooth: true, data: [2,5,12,30,75,190,430], lineStyle: { width: 2, type: 'dotted', color: p.mut }, itemStyle: { color: p.mut }, symbolSize: 4 }
+    ], animationDuration: reduced ? 0 : 900 });
+}
+drawAll();
+addEventListener('resize', () => charts.forEach(c => c.resize()));
+</script>
+</body>
+</html>
